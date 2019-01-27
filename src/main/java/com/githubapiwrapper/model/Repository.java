@@ -1,3 +1,5 @@
+package com.githubapiwrapper.model;
+
 import java.util.Objects;
 
 public class Repository {
@@ -58,7 +60,7 @@ public class Repository {
 
     @Override
     public String toString() {
-        return "Repository{" +
+        return "com.githubapiwrapper.dao.modelithubapiwrapper.dao.Repository{" +
                 "fullName='" + fullName + '\'' +
                 ", description='" + description + '\'' +
                 ", cloneUrl='" + cloneUrl + '\'' +
