@@ -3,12 +3,9 @@ package com.githubapiwrapper.dao;
 public abstract class AbstractFactory {
 
     public enum FactoryType {
-        DAO("Default DAO factory type");
+        DAO();
 
-        private String type;
-
-        FactoryType(String type) {
-            this.type = type;
+        FactoryType() {
         }
     }
 

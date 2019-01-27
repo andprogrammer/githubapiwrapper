@@ -3,20 +3,18 @@ package com.githubapiwrapper;
 import com.githubapiwrapper.dao.AbstractFactory;
 import com.githubapiwrapper.dao.RepositoryDAO;
 import com.githubapiwrapper.service.RepositoryService;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import org.apache.log4j.Logger;
 
 public class Application {
 
-    public static void main(String[] args) throws UnirestException {
+    private final static Logger logger = Logger.getLogger(new Throwable().getStackTrace()[0].getClassName().getClass());
 
+    public static void main(String[] args) {
         runApplication();
     }
 
-    private static void runApplication() throws UnirestException {
-
-//        RestClient client = new RestClient("https://api.github.com/repos/andprogrammer/DBHandler", 20);
-//        Repository repository = client.request("andprogrammer", "DBHandler");
-//        System.out.println(repository);
+    private static void runApplication() {
+        logger.info(new Throwable().getStackTrace()[0].getMethodName() + "() Starting Github Wrapper");
         startServices();
     }
 

@@ -1,4 +1,4 @@
-package com.githubapiwrapper;
+package com.githubapiwrapper.service;
 
 import com.githubapiwrapper.model.Repository;
 import com.mashape.unirest.http.HttpResponse;
@@ -17,7 +17,7 @@ public class RestClient {
     }
 
     public Repository request(String owner, String repositoryName) throws UnirestException {
-        final HttpResponse<JsonNode> response = Unirest.get("https://api.github.com/repos/" + owner + "/" + repositoryName).queryString("limit", 20).asJson();
+        final HttpResponse<JsonNode> response = Unirest.get(server + "repos/" + owner + "/" + repositoryName).queryString("limit", requestPerSecond).asJson();
 
         String fullName = response.getBody().getObject().getString("full_name");
         String description = response.getBody().getObject().getString("description");
