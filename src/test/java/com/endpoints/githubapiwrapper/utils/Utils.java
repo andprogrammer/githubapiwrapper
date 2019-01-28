@@ -12,17 +12,17 @@ import java.util.Random;
 
 public class Utils {
 
-    public static final int SUCCESS_RESPONSE = 200;
     public static final String HTTP_LOCALHOST = "http://localhost";
     public static final String PORT = "4567";
     public static final String NO_EXISTING_OWNER = "noExistingOwner" + new BigInteger(256, new Random());
     public static final String NO_EXISTING_REPOSITORY = "noExistingRepository" + new BigInteger(256, new Random());
+    public static final String RESPONSE_ERROR = "Response error";
 
     private final static Logger logger = Logger.getLogger(new Throwable().getStackTrace()[0].getClassName().getClass());
 
-    public static Response request(String method, String path) {
+    public static Response request(String method, String route) {
         try {
-            URL url = new URL(HTTP_LOCALHOST + ":" + PORT + path);
+            URL url = new URL(HTTP_LOCALHOST + ":" + PORT + route);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(method);
             connection.setDoOutput(true);
@@ -31,18 +31,7 @@ public class Utils {
             return new Response(connection.getResponseCode(), body);
         } catch (IOException e) {
             logger.error(new Throwable().getStackTrace()[0].getMethodName() + "() " + e.getMessage());
-            throw new CustomException("Response error");
-        }
-    }
-
-    public static class Response {
-
-        public final String body;
-        public final int status;
-
-        public Response(int status, String body) {
-            this.status = status;
-            this.body = body;
+            throw new CustomException(RESPONSE_ERROR);
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.endpoints.githubapiwrapper.service;
 
-import com.endpoints.githubapiwrapper.utils.Utils;
+import com.endpoints.githubapiwrapper.utils.Response;
 import com.githubapiwrapper.dao.impl.RepositoryDAOImpl;
 import com.githubapiwrapper.exception.CustomException;
 import com.githubapiwrapper.model.Repository;
@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static com.endpoints.githubapiwrapper.utils.Utils.*;
+import static com.githubapiwrapper.utils.JSONUtil.SUCCESS;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static spark.Spark.awaitInitialization;
@@ -46,19 +47,19 @@ public class RepositoryServiceTestSuite {
     public void testGetRepository() {
         String owner = "andprogrammer";
         String repositoryName = "DBHandler";
-        Utils.Response response = request("GET", "/repositories/" + owner + "/" + repositoryName);
+        Response response = request("GET", "/repositories/" + owner + "/" + repositoryName);
         Repository expectedRepository = new Repository("andprogrammer/DBHandler", "DBHandler for postgresql RDBMS.", "https://github.com/andprogrammer/DBHandler.git", 0, "2017-06-05T23:25:19Z");
-        assertJSON(response, expectedRepository);
+        assertResponse(response, expectedRepository);
     }
 
     @Test
     public void testGetNoExistingRepository() {
-        expectedExceptionThrow(CustomException.class, "Response error");
+        expectedExceptionThrow(CustomException.class, RESPONSE_ERROR);
         request("GET", "/repositories/" + NO_EXISTING_OWNER + "/" + NO_EXISTING_REPOSITORY);
     }
 
-    private void assertJSON(Utils.Response response, Repository expectedRepository) {
-        assertThat(SUCCESS_RESPONSE, equalTo(response.status));
+    private void assertResponse(Response response, Repository expectedRepository) {
+        assertThat(SUCCESS, equalTo(response.status));
         JSONObject json = new JSONObject(response.body);
         assertThat(expectedRepository.getCreatedAt(), equalTo(json.getString("createdAt")));
         assertThat(expectedRepository.getFullName(), equalTo(json.getString("fullName")));

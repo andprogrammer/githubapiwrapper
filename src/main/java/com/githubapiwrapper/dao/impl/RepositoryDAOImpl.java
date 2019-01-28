@@ -1,8 +1,8 @@
 package com.githubapiwrapper.dao.impl;
 
 import com.githubapiwrapper.dao.RepositoryDAO;
+import com.githubapiwrapper.http.RestClient;
 import com.githubapiwrapper.model.Repository;
-import com.githubapiwrapper.service.RestClient;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.log4j.Logger;
 

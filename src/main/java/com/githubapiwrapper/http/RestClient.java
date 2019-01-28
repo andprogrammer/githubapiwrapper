@@ -1,4 +1,4 @@
-package com.githubapiwrapper.service;
+package com.githubapiwrapper.http;
 
 import com.githubapiwrapper.exception.CustomException;
 import com.githubapiwrapper.model.Repository;
