@@ -1,13 +1,12 @@
 package com.githubapiwrapper.service;
 
 import com.githubapiwrapper.dao.RepositoryDAO;
-import static spark.Spark.*;
-
 import com.githubapiwrapper.exception.CustomException;
 import com.githubapiwrapper.exception.ResponseError;
 import com.githubapiwrapper.utils.JSONUtil;
 
 import static com.githubapiwrapper.utils.JSONUtil.FAILED_RESPONSE;
+import static spark.Spark.*;
 
 public class RepositoryService {
 
