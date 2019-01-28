@@ -12,6 +12,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static com.endpoints.githubapiwrapper.utils.Utils.NO_EXISTING_OWNER;
+import static com.endpoints.githubapiwrapper.utils.Utils.NO_EXISTING_REPOSITORY;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static spark.Spark.stop;
@@ -46,8 +48,8 @@ public class RepositoryDAOTestSuite {
     @Test
     public void testGetNoExistingRepository() throws CustomException, UnirestException {
         RepositoryDAO repositoryDAO = getRepositoryDAO();
-        expectedExceptionThrow(org.json.JSONException.class, "JSONObject[\"full_name\"] not found.");
-        repositoryDAO.getRepository("noExistingOwner4234234234", "noExistingRepository324234234");
+        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect request : Not Found");
+        repositoryDAO.getRepository(NO_EXISTING_OWNER, NO_EXISTING_REPOSITORY);
     }
 
     private <T> void expectedExceptionThrow(Class<T> exceptionType, String exceptionMessage) {

@@ -1,8 +1,9 @@
 package com.githubapiwrapper.service;
 
+import com.githubapiwrapper.exception.CustomException;
 import com.githubapiwrapper.model.Repository;
+import com.githubapiwrapper.utils.JacksonObjectMapper;
 import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
@@ -17,15 +18,11 @@ public class RestClient {
     }
 
     public Repository request(String owner, String repositoryName) throws UnirestException {
-        final HttpResponse<JsonNode> response = Unirest.get(server + "repos/" + owner + "/" + repositoryName).queryString("limit", requestPerSecond).asJson();
-
-        String fullName = response.getBody().getObject().getString("full_name");
-        String description = response.getBody().getObject().getString("description");
-        String cloneUrl = response.getBody().getObject().getString("clone_url");
-        int stars = response.getBody().getObject().getInt("stargazers_count");
-        String createdAt = response.getBody().getObject().getString("created_at");
-
-        Repository repository = new Repository(fullName, description, cloneUrl, stars, createdAt);
-        return repository;
+        Unirest.setObjectMapper(new JacksonObjectMapper());
+        String url = server + "repos/" + owner + "/" + repositoryName;
+        HttpResponse<Repository> response = Unirest.get(url).queryString("limit", requestPerSecond).asObject(Repository.class);
+        if (200 != response.getStatus())
+            throw new CustomException("Incorrect request : " + response.getStatusText());
+        return response.getBody();
     }
 }

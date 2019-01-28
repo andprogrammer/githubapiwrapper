@@ -5,14 +5,18 @@ import org.apache.log4j.Logger;
 import spark.utils.IOUtils;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
 
 public class Utils {
 
     public static final int SUCCESS_RESPONSE = 200;
     public static final String HTTP_LOCALHOST = "http://localhost";
     public static final String PORT = "4567";
+    public static final String NO_EXISTING_OWNER = "noExistingOwner" + new BigInteger(256, new Random());
+    public static final String NO_EXISTING_REPOSITORY = "noExistingRepository" + new BigInteger(256, new Random());
 
     private final static Logger logger = Logger.getLogger(new Throwable().getStackTrace()[0].getClassName().getClass());
 

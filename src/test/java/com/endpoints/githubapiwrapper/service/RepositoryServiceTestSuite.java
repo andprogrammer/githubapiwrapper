@@ -2,6 +2,7 @@ package com.endpoints.githubapiwrapper.service;
 
 import com.endpoints.githubapiwrapper.utils.Utils;
 import com.githubapiwrapper.dao.impl.RepositoryDAOImpl;
+import com.githubapiwrapper.exception.CustomException;
 import com.githubapiwrapper.model.Repository;
 import com.githubapiwrapper.service.RepositoryService;
 import org.apache.log4j.Logger;
@@ -46,9 +47,14 @@ public class RepositoryServiceTestSuite {
         String owner = "andprogrammer";
         String repositoryName = "DBHandler";
         Utils.Response response = request("GET", "/repositories/" + owner + "/" + repositoryName);
-        JSONObject json = new JSONObject(response.body);
         Repository expectedRepository = new Repository("andprogrammer/DBHandler", "DBHandler for postgresql RDBMS.", "https://github.com/andprogrammer/DBHandler.git", 0, "2017-06-05T23:25:19Z");
         assertJSON(response, expectedRepository);
+    }
+
+    @Test
+    public void testGetNoExistingRepository() {
+        expectedExceptionThrow(CustomException.class, "Response error");
+        request("GET", "/repositories/" + NO_EXISTING_OWNER + "/" + NO_EXISTING_REPOSITORY);
     }
 
     private void assertJSON(Utils.Response response, Repository expectedRepository) {
@@ -59,5 +65,10 @@ public class RepositoryServiceTestSuite {
         assertThat(expectedRepository.getDescription(), equalTo(json.getString("description")));
         assertThat(expectedRepository.getStars(), equalTo(json.getInt("stars")));
         assertThat(expectedRepository.getCloneUrl(), equalTo(json.getString("cloneUrl")));
+    }
+
+    private <T> void expectedExceptionThrow(Class<T> exceptionType, String exceptionMessage) {
+        expectedExceptionThrown.expect((Class<? extends Throwable>) exceptionType);
+        expectedExceptionThrown.expectMessage(exceptionMessage);
     }
 }
