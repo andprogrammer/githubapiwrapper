@@ -1,6 +1,8 @@
 package com.endpoints.githubapiwrapper.service;
 
 import com.endpoints.githubapiwrapper.utils.Response;
+import com.githubapiwrapper.dao.AbstractFactory;
+import com.githubapiwrapper.dao.RepositoryDAO;
 import com.githubapiwrapper.dao.impl.RepositoryDAOImpl;
 import com.githubapiwrapper.exception.CustomException;
 import com.githubapiwrapper.model.Repository;
@@ -34,8 +36,14 @@ public class RepositoryServiceTestSuite {
                     + "() Starting testSuite "
                     + new Throwable().getStackTrace()[0].getClassName()
                     + " on " + HTTP_LOCALHOST + ":" + PORT);
-        new RepositoryService(new RepositoryDAOImpl());
+        startService();
         awaitInitialization();
+    }
+
+    private void startService() {
+        AbstractFactory factory = AbstractFactory.getFactory(AbstractFactory.FactoryType.DAO);
+        RepositoryDAO repository = factory.create();
+        new RepositoryService(repository);
     }
 
     @After
