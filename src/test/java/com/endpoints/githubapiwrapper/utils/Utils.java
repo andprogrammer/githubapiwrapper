@@ -14,9 +14,14 @@ public class Utils {
 
     public static final String HTTP_LOCALHOST = "http://localhost";
     public static final String PORT = "4567";
-    public static final String NO_EXISTING_OWNER = "noExistingOwner" + new BigInteger(256, new Random());
-    public static final String NO_EXISTING_REPOSITORY = "noExistingRepository" + new BigInteger(256, new Random());
     public static final String RESPONSE_ERROR = "Response error";
+    public static final String REPOSITORY_OWNER_TEST = "andprogrammer";
+    public static final String REPOSITORY_NAME_TEST = "Blockchain";
+    public static final String REPOSITORY_DESCRIPTION_TEST = "Simple blockchain";
+    public static final String REPOSITORY_CLONE_URL_TEST = "https://github.com/" + REPOSITORY_OWNER_TEST + "/" + REPOSITORY_NAME_TEST + ".git";
+    public static final String REPOSITORY_CREATE_AT_TEST = "2018-10-14T17:51:32Z";
+    public static final String NO_EXISTING_REPOSITORY_OWNER = "noExistingOwner" + new BigInteger(256, new Random());
+    public static final String NO_EXISTING_REPOSITORY_NAME = "noExistingRepository" + new BigInteger(256, new Random());
 
     private final static Logger logger = Logger.getLogger(new Throwable().getStackTrace()[0].getClassName().getClass());
 

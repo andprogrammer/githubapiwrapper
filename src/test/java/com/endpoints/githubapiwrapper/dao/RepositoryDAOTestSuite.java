@@ -12,8 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.endpoints.githubapiwrapper.utils.Utils.NO_EXISTING_OWNER;
-import static com.endpoints.githubapiwrapper.utils.Utils.NO_EXISTING_REPOSITORY;
+import static com.endpoints.githubapiwrapper.utils.Utils.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static spark.Spark.stop;
@@ -41,7 +40,7 @@ public class RepositoryDAOTestSuite {
     @Test
     public void testGetRepository() throws CustomException, UnirestException {
         Repository repository = createRepository();
-        Repository expectedRepository = new Repository("andprogrammer/DBHandler", "DBHandler for postgresql RDBMS.", "https://github.com/andprogrammer/DBHandler.git", 0, "2017-06-05T23:25:19Z");
+        Repository expectedRepository = new Repository(REPOSITORY_OWNER_TEST + "/" + REPOSITORY_NAME_TEST, REPOSITORY_DESCRIPTION_TEST, REPOSITORY_CLONE_URL_TEST, 0, REPOSITORY_CREATE_AT_TEST);
         assertThat(expectedRepository, equalTo(repository));
     }
 
@@ -49,7 +48,7 @@ public class RepositoryDAOTestSuite {
     public void testGetNoExistingRepository() throws CustomException, UnirestException {
         RepositoryDAO repositoryDAO = getRepositoryDAO();
         expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect request : Not Found");
-        repositoryDAO.getRepository(NO_EXISTING_OWNER, NO_EXISTING_REPOSITORY);
+        repositoryDAO.getRepository(NO_EXISTING_REPOSITORY_OWNER, NO_EXISTING_REPOSITORY_NAME);
     }
 
     private <T> void expectedExceptionThrow(Class<T> exceptionType, String exceptionMessage) {
@@ -59,7 +58,7 @@ public class RepositoryDAOTestSuite {
 
     private Repository createRepository() throws CustomException, UnirestException {
         RepositoryDAO repositoryDAO = getRepositoryDAO();
-        Repository repository = repositoryDAO.getRepository("andprogrammer", "DBHandler");
+        Repository repository = repositoryDAO.getRepository(REPOSITORY_OWNER_TEST, REPOSITORY_NAME_TEST);
         return repository;
     }
 

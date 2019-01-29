@@ -52,17 +52,17 @@ public class RepositoryServiceTestSuite {
 
     @Test
     public void testGetRepository() {
-        String owner = "andprogrammer";
-        String repositoryName = "DBHandler";
+        String owner = REPOSITORY_OWNER_TEST;
+        String repositoryName = REPOSITORY_NAME_TEST;
         Response response = request("GET", "/repositories/" + owner + "/" + repositoryName);
-        Repository expectedRepository = new Repository("andprogrammer/DBHandler", "DBHandler for postgresql RDBMS.", "https://github.com/andprogrammer/DBHandler.git", 0, "2017-06-05T23:25:19Z");
+        Repository expectedRepository = new Repository(owner + "/" + repositoryName, REPOSITORY_DESCRIPTION_TEST, REPOSITORY_CLONE_URL_TEST, 0, REPOSITORY_CREATE_AT_TEST);
         assertResponse(response, expectedRepository);
     }
 
     @Test
     public void testGetNoExistingRepository() {
         expectedExceptionThrow(CustomException.class, RESPONSE_ERROR);
-        request("GET", "/repositories/" + NO_EXISTING_OWNER + "/" + NO_EXISTING_REPOSITORY);
+        request("GET", "/repositories/" + NO_EXISTING_REPOSITORY_OWNER + "/" + NO_EXISTING_REPOSITORY_NAME);
     }
 
     private void assertResponse(Response response, Repository expectedRepository) {

@@ -8,7 +8,7 @@ mvn clean install
 ```
 
 ### Example of usage
-- GET http://localhost:4567/repositories/andprogrammer/DBHandler
+- GET http://localhost:4567/repositories/andprogrammer/Blockchain
 
 
 ### Endpoints

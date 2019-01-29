@@ -11,8 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.endpoints.githubapiwrapper.utils.Utils.NO_EXISTING_OWNER;
-import static com.endpoints.githubapiwrapper.utils.Utils.NO_EXISTING_REPOSITORY;
+import static com.endpoints.githubapiwrapper.utils.Utils.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static spark.Spark.stop;
@@ -41,10 +40,10 @@ public class GithubClientTestSuite {
     public void testRequest() throws UnirestException {
         int requestPerSecond = 20;
         RestClient client = new GithubClient(requestPerSecond);
-        String owner = "andprogrammer";
-        String repositoryName = "DBHandler";
+        String owner = REPOSITORY_OWNER_TEST;
+        String repositoryName = REPOSITORY_NAME_TEST;
         Repository repository = client.request(owner, repositoryName);
-        Repository expectedRepository = new Repository("andprogrammer/DBHandler", "DBHandler for postgresql RDBMS.", "https://github.com/andprogrammer/DBHandler.git", 0, "2017-06-05T23:25:19Z");
+        Repository expectedRepository = new Repository(owner + "/" + repositoryName, REPOSITORY_DESCRIPTION_TEST, REPOSITORY_CLONE_URL_TEST, 0, REPOSITORY_CREATE_AT_TEST);
         assertThat(expectedRepository, equalTo(repository));
     }
 
@@ -53,7 +52,7 @@ public class GithubClientTestSuite {
         int requestPerSecond = 20;
         RestClient client = new GithubClient(requestPerSecond);
         expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect request : Not Found");
-        client.request(NO_EXISTING_OWNER, NO_EXISTING_REPOSITORY);
+        client.request(NO_EXISTING_REPOSITORY_OWNER, NO_EXISTING_REPOSITORY_NAME);
     }
 
     private <T> void expectedExceptionThrow(Class<T> exceptionType, String exceptionMessage) {
