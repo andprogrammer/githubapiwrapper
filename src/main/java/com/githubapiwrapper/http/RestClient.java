@@ -5,8 +5,8 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 public abstract class RestClient {
 
-    final String server;
-    final int requestPerSecond;
+    final protected String server;
+    final protected int requestPerSecond;
 
     public RestClient(String server, int requestPerSecond) {
         this.server = server;

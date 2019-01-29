@@ -7,6 +7,8 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import java.util.Objects;
+
 public class GithubClient extends RestClient {
 
     public GithubClient(int requestPerSecond) {
@@ -21,5 +23,14 @@ public class GithubClient extends RestClient {
         if (200 != response.getStatus())
             throw new CustomException("Incorrect request : " + response.getStatusText());
         return response.getBody();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GithubClient that = (GithubClient) o;
+        return Objects.equals(requestPerSecond, that.requestPerSecond) &&
+                Objects.equals(server, that.server);
     }
 }
