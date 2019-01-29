@@ -3,7 +3,6 @@ package com.endpoints.githubapiwrapper.service;
 import com.endpoints.githubapiwrapper.utils.Response;
 import com.githubapiwrapper.dao.AbstractFactory;
 import com.githubapiwrapper.dao.RepositoryDAO;
-import com.githubapiwrapper.dao.impl.RepositoryDAOImpl;
 import com.githubapiwrapper.exception.CustomException;
 import com.githubapiwrapper.model.Repository;
 import com.githubapiwrapper.service.RepositoryService;

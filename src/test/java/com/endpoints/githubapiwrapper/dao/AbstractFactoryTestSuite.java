@@ -1,6 +1,6 @@
-package com.endpoints.githubapiwrapper.http;
+package com.endpoints.githubapiwrapper.dao;
 
-import com.githubapiwrapper.http.RestClientFactory;
+import com.githubapiwrapper.dao.AbstractFactory;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
@@ -8,11 +8,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.githubapiwrapper.http.RestClientFactory.FactoryType.GITHUB;
+import static com.githubapiwrapper.dao.AbstractFactory.FactoryType.DAO;
 import static junit.framework.TestCase.assertNotNull;
 import static spark.Spark.stop;
 
-public class RestClientFactoryTestSuite {
+public class AbstractFactoryTestSuite {
 
     private final static Logger logger = Logger.getLogger(new Throwable().getStackTrace()[0].getClassName().getClass());
 
@@ -34,14 +34,14 @@ public class RestClientFactoryTestSuite {
 
     @Test
     public void testGetFactory() {
-        RestClientFactory factory = RestClientFactory.getFactory(GITHUB);
+        AbstractFactory factory = AbstractFactory.getFactory(DAO);
         assertNotNull(factory);
     }
 
     @Test
     public void testGetFactoryNullFactoryType() {
         expectedExceptionThrow(java.lang.NullPointerException.class);
-        RestClientFactory.getFactory(null);
+        AbstractFactory.getFactory(null);
     }
 
     private <T> void expectedExceptionThrow(Class<T> exceptionType) {
