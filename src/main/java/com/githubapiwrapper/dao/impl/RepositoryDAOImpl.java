@@ -2,6 +2,7 @@ package com.githubapiwrapper.dao.impl;
 
 import com.githubapiwrapper.dao.RepositoryDAO;
 import com.githubapiwrapper.http.RestClient;
+import com.githubapiwrapper.http.RestClientFactory;
 import com.githubapiwrapper.model.Repository;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.log4j.Logger;
@@ -11,11 +12,13 @@ import static com.githubapiwrapper.utils.Utils.validate;
 public class RepositoryDAOImpl implements RepositoryDAO {
 
     private final static Logger logger = Logger.getLogger(new Throwable().getStackTrace()[0].getClassName().getClass());
+    protected static final int REQUEST_PER_SECOND = 20;
 
     public Repository getRepository(String owner, String repositoryName) throws UnirestException {
         validate(owner);
         validate(repositoryName);
-        RestClient client = new RestClient("https://api.github.com/", 20);
+        RestClientFactory factory = RestClientFactory.getFactory(RestClientFactory.FactoryType.GITHUB);
+        RestClient client = factory.create(REQUEST_PER_SECOND);
         Repository repository = client.request(owner, repositoryName);
         if (logger.isDebugEnabled())
             logger.debug(new Throwable().getStackTrace()[0].getMethodName() + "() " + repository);
