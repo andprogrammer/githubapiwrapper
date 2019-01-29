@@ -48,6 +48,22 @@ public class GithubClientTestSuite {
     }
 
     @Test
+    public void testRequestInvalidRepositoryOwner() throws UnirestException {
+        int requestPerSecond = 20;
+        RestClient client = new GithubClient(requestPerSecond);
+        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect string=null");
+        client.request(null, REPOSITORY_NAME_TEST);
+    }
+
+    @Test
+    public void testRequestInvalidRepositoryName() throws UnirestException {
+        int requestPerSecond = 20;
+        RestClient client = new GithubClient(requestPerSecond);
+        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect string=null");
+        client.request(REPOSITORY_OWNER_TEST, null);
+    }
+
+    @Test
     public void testInvalidRequest() throws UnirestException {
         int requestPerSecond = 20;
         RestClient client = new GithubClient(requestPerSecond);

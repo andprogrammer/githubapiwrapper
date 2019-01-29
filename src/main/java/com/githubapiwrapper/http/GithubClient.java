@@ -9,6 +9,8 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 import java.util.Objects;
 
+import static com.githubapiwrapper.utils.Utils.validate;
+
 public class GithubClient extends RestClient {
 
     public GithubClient(int requestPerSecond) {
@@ -17,6 +19,8 @@ public class GithubClient extends RestClient {
 
     @Override
     public Repository request(String owner, String repositoryName) throws UnirestException {
+        validate(owner);
+        validate(repositoryName);
         Unirest.setObjectMapper(new JacksonObjectMapper());
         String url = server + "repos/" + owner + "/" + repositoryName;
         HttpResponse<Repository> response = Unirest.get(url).queryString("limit", requestPerSecond).asObject(Repository.class);

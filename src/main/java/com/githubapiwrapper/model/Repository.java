@@ -10,12 +10,16 @@ public class Repository {
 
     @JsonProperty("full_name")
     private String fullName;
+
     @JsonProperty("description")
     private String description;
+
     @JsonProperty("clone_url")
     private String cloneUrl;
+
     @JsonProperty("stargazers_count")
     private int stars;
+
     @JsonProperty("created_at")
     private String createdAt;
 
@@ -48,26 +52,6 @@ public class Repository {
 
     public String getCreatedAt() {
         return createdAt;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setCloneUrl(String cloneUrl) {
-        this.cloneUrl = cloneUrl;
-    }
-
-    public void setStars(int stars) {
-        this.stars = stars;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
     }
 
     @Override

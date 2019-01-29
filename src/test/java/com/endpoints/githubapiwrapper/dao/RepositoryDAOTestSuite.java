@@ -45,6 +45,20 @@ public class RepositoryDAOTestSuite {
     }
 
     @Test
+    public void testGetRepositoryInvalidRepositoryOwner() throws CustomException, UnirestException {
+        RepositoryDAO repositoryDAO = getRepositoryDAO();
+        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect string=null");
+        repositoryDAO.getRepository(null, REPOSITORY_NAME_TEST);
+    }
+
+    @Test
+    public void testGetRepositoryInvalidRepositoryName() throws CustomException, UnirestException {
+        RepositoryDAO repositoryDAO = getRepositoryDAO();
+        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect string=null");
+        repositoryDAO.getRepository(REPOSITORY_OWNER_TEST, null);
+    }
+
+    @Test
     public void testGetNoExistingRepository() throws CustomException, UnirestException {
         RepositoryDAO repositoryDAO = getRepositoryDAO();
         expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect request : Not Found");
