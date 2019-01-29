@@ -9,9 +9,9 @@ public abstract class AbstractFactory {
         }
     }
 
-    public abstract RepositoryDAO getRepositoryDAO();
+    public abstract RepositoryDAO create();
 
-    public static DAOFactory getFactory(FactoryType type) {
+    public static AbstractFactory getFactory(FactoryType type) {
         switch (type) {
             case DAO:
                 return new DAOFactory();

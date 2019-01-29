@@ -64,6 +64,6 @@ public class RepositoryDAOTestSuite {
     }
 
     private RepositoryDAO getRepositoryDAO() {
-        return AbstractFactory.getFactory(AbstractFactory.FactoryType.DAO).getRepositoryDAO();
+        return AbstractFactory.getFactory(AbstractFactory.FactoryType.DAO).create();
     }
 }

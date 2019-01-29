@@ -20,7 +20,7 @@ public class Application {
 
     private static void startServices() {
         AbstractFactory daoFactory = AbstractFactory.getFactory(AbstractFactory.FactoryType.DAO);
-        RepositoryDAO repositoryDAO = daoFactory.getRepositoryDAO();
+        RepositoryDAO repositoryDAO = daoFactory.create();
         new RepositoryService(repositoryDAO);
     }
 }
