@@ -11,7 +11,7 @@ import static com.githubapiwrapper.utils.Utils.validate;
 
 public class RepositoryDAOImpl implements RepositoryDAO {
 
-    private final static Logger logger = Logger.getLogger(new Throwable().getStackTrace()[0].getClassName().getClass());
+    private final static Logger logger = Logger.getLogger(RepositoryDAOImpl.class);
     protected static final int REQUEST_PER_SECOND = 20;
 
     public Repository getRepository(String owner, String repositoryName) throws UnirestException {
@@ -21,7 +21,7 @@ public class RepositoryDAOImpl implements RepositoryDAO {
         RestClient client = factory.create(REQUEST_PER_SECOND);
         Repository repository = client.request(owner, repositoryName);
         if (logger.isDebugEnabled())
-            logger.debug(new Throwable().getStackTrace()[0].getMethodName() + "() " + repository);
+            logger.debug(repository);
         return repository;
     }
 }

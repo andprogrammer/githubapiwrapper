@@ -3,10 +3,7 @@ package com.githubapiwrapper.dao;
 public abstract class AbstractFactory {
 
     public enum FactoryType {
-        DAO();
-
-        FactoryType() {
-        }
+        DAO()
     }
 
     public abstract RepositoryDAO create();
