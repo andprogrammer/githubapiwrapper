@@ -6,6 +6,10 @@ public class CustomException extends RuntimeException {
         super(message);
     }
 
+    public CustomException(int message) {
+        super(String.valueOf(message));
+    }
+
     public CustomException(String msg, Throwable cause) {
         super(msg, cause);
     }

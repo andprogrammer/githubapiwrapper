@@ -55,7 +55,7 @@ public class GithubClientTestSuite {
     public void testInvalidRequest() throws UnirestException {
         int requestPerSecond = 20;
         RestClient client = new GithubClient(requestPerSecond);
-        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect request : Not Found");
+        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "404");
         client.request(NO_EXISTING_REPOSITORY_OWNER, NO_EXISTING_REPOSITORY_NAME);
     }
 

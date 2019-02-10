@@ -25,7 +25,7 @@ public class GithubClient extends RestClient {
         String url = server + "repos/" + owner + "/" + repositoryName;
         HttpResponse<Repository> response = Unirest.get(url).queryString("limit", requestPerSecond).asObject(Repository.class);
         if (200 != response.getStatus())
-            throw new CustomException("Incorrect request : " + response.getStatusText());
+            throw new CustomException(response.getStatus());
         return response.getBody();
     }
 

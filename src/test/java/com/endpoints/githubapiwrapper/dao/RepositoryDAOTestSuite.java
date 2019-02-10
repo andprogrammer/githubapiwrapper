@@ -49,7 +49,7 @@ public class RepositoryDAOTestSuite {
     @Test
     public void testGetNoExistingRepository() throws CustomException, UnirestException {
         RepositoryDAO repositoryDAO = getRepositoryDAO();
-        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect request : Not Found");
+        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "404");
         repositoryDAO.getRepository(NO_EXISTING_REPOSITORY_OWNER, NO_EXISTING_REPOSITORY_NAME);
     }
 
