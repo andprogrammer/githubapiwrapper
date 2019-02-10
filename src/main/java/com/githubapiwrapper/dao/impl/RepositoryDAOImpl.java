@@ -7,7 +7,7 @@ import com.githubapiwrapper.model.Repository;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.log4j.Logger;
 
-import static com.githubapiwrapper.utils.Utils.validate;
+import static com.githubapiwrapper.utils.Utils.checkIfNotNull;
 
 public class RepositoryDAOImpl implements RepositoryDAO {
 
@@ -15,9 +15,9 @@ public class RepositoryDAOImpl implements RepositoryDAO {
     protected static final int REQUEST_PER_SECOND = 20;
 
     public Repository getRepository(String owner, String repositoryName) throws UnirestException {
-        validate(owner);
-        validate(repositoryName);
-        RestClientFactory factory = RestClientFactory.getFactory(RestClientFactory.FactoryType.GITHUB);
+        checkIfNotNull(owner);
+        checkIfNotNull(repositoryName);
+        RestClientFactory factory = RestClientFactory.getFactory();
         RestClient client = factory.create(REQUEST_PER_SECOND);
         Repository repository = client.request(owner, repositoryName);
         if (logger.isDebugEnabled())

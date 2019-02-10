@@ -4,9 +4,7 @@ import com.githubapiwrapper.http.GithubClient;
 import com.githubapiwrapper.http.RestClient;
 import com.githubapiwrapper.model.Repository;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.apache.log4j.Logger;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -18,18 +16,8 @@ import static spark.Spark.stop;
 
 public class GithubClientTestSuite {
 
-    private final static Logger logger = Logger.getLogger(new Throwable().getStackTrace()[0].getClassName().getClass());
-
     @Rule
     public ExpectedException expectedExceptionThrown = ExpectedException.none();
-
-    @Before
-    public void setUp() {
-        if (logger.isDebugEnabled())
-            logger.debug(new Throwable().getStackTrace()[0].getMethodName()
-                    + "() Starting testSuite "
-                    + new Throwable().getStackTrace()[0].getClassName());
-    }
 
     @After
     public void tearDown() {

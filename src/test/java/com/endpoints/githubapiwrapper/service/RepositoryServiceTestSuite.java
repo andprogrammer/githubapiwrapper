@@ -6,7 +6,6 @@ import com.githubapiwrapper.dao.RepositoryDAO;
 import com.githubapiwrapper.exception.CustomException;
 import com.githubapiwrapper.model.Repository;
 import com.githubapiwrapper.service.RepositoryService;
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
@@ -15,7 +14,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static com.endpoints.githubapiwrapper.utils.Utils.*;
-import static com.githubapiwrapper.utils.JSONUtil.SUCCESS;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static spark.Spark.awaitInitialization;
@@ -23,24 +22,17 @@ import static spark.Spark.stop;
 
 public class RepositoryServiceTestSuite {
 
-    private final static Logger logger = Logger.getLogger(new Throwable().getStackTrace()[0].getClassName().getClass());
-
     @Rule
     public ExpectedException expectedExceptionThrown = ExpectedException.none();
 
     @Before
     public void setUp() {
-        if (logger.isDebugEnabled())
-            logger.debug(new Throwable().getStackTrace()[0].getMethodName()
-                    + "() Starting testSuite "
-                    + new Throwable().getStackTrace()[0].getClassName()
-                    + " on " + HTTP_LOCALHOST + ":" + PORT);
         startService();
         awaitInitialization();
     }
 
     private void startService() {
-        AbstractFactory factory = AbstractFactory.getFactory(AbstractFactory.FactoryType.DAO);
+        AbstractFactory factory = AbstractFactory.getFactory();
         RepositoryDAO repository = factory.create();
         new RepositoryService(repository);
     }
@@ -66,7 +58,7 @@ public class RepositoryServiceTestSuite {
     }
 
     private void assertResponse(Response response, Repository expectedRepository) {
-        assertThat(SUCCESS, equalTo(response.status));
+        assertThat(SC_OK, equalTo(response.status));
         JSONObject json = new JSONObject(response.body);
         assertThat(expectedRepository.getCreatedAt(), equalTo(json.getString("createdAt")));
         assertThat(expectedRepository.getFullName(), equalTo(json.getString("fullName")));

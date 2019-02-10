@@ -2,17 +2,13 @@ package com.githubapiwrapper.exception;
 
 public class ResponseError {
 
-    private String message;
+    private String errorCode;
 
-    public ResponseError(String message) {
-        this.message = String.format(message);
+    public ResponseError(String errorCode) {
+        this.errorCode = errorCode;
     }
 
-    public ResponseError(Exception e) {
-        this.message = e.getMessage();
-    }
-
-    public String getMessage() {
-        return this.message;
+    public String getErrorCode() {
+        return this.errorCode;
     }
 }

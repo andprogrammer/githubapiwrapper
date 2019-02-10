@@ -5,9 +5,7 @@ import com.githubapiwrapper.dao.RepositoryDAO;
 import com.githubapiwrapper.exception.CustomException;
 import com.githubapiwrapper.model.Repository;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.apache.log4j.Logger;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -19,18 +17,8 @@ import static spark.Spark.stop;
 
 public class RepositoryDAOTestSuite {
 
-    private final static Logger logger = Logger.getLogger(new Throwable().getStackTrace()[0].getClassName().getClass());
-
     @Rule
     public ExpectedException expectedExceptionThrown = ExpectedException.none();
-
-    @Before
-    public void setUp() {
-        if (logger.isDebugEnabled())
-            logger.debug(new Throwable().getStackTrace()[0].getMethodName()
-                    + "() Starting testSuite "
-                    + new Throwable().getStackTrace()[0].getClassName());
-    }
 
     @After
     public void tearDown() {
@@ -77,6 +65,6 @@ public class RepositoryDAOTestSuite {
     }
 
     private RepositoryDAO getRepositoryDAO() {
-        return AbstractFactory.getFactory(AbstractFactory.FactoryType.DAO).create();
+        return AbstractFactory.getFactory().create();
     }
 }

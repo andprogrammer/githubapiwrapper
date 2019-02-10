@@ -9,7 +9,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 import java.util.Objects;
 
-import static com.githubapiwrapper.utils.Utils.validate;
+import static com.githubapiwrapper.utils.Utils.checkIfNotNull;
 
 public class GithubClient extends RestClient {
 
@@ -19,8 +19,8 @@ public class GithubClient extends RestClient {
 
     @Override
     public Repository request(String owner, String repositoryName) throws UnirestException {
-        validate(owner);
-        validate(repositoryName);
+        checkIfNotNull(owner);
+        checkIfNotNull(repositoryName);
         Unirest.setObjectMapper(new JacksonObjectMapper());
         String url = server + "repos/" + owner + "/" + repositoryName;
         HttpResponse<Repository> response = Unirest.get(url).queryString("limit", requestPerSecond).asObject(Repository.class);
@@ -31,6 +31,7 @@ public class GithubClient extends RestClient {
 
     @Override
     public boolean equals(Object o) {
+        if (!super.equals(o)) return false;
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GithubClient that = (GithubClient) o;

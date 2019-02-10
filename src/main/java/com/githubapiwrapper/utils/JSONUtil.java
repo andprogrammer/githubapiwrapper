@@ -4,10 +4,9 @@ import com.google.gson.Gson;
 
 public class JSONUtil {
 
-    public static final int SUCCESS = 200;
-    public static final int ERROR = 400;
+    static Gson converter = new Gson();
 
     public static String toJson(Object object) {
-        return new Gson().toJson(object);
+        return converter.toJson(object);
     }
 }
