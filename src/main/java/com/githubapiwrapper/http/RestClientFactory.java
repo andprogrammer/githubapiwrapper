@@ -9,7 +9,6 @@ public abstract class RestClientFactory {
     public abstract RestClient create(int requestPerSecond);
 
     public static RestClientFactory getFactory(FactoryType type) {
-        if(type == FactoryType.GITHUB)
         switch (type) {
             case GITHUB:
                 return new GithubFactory();
