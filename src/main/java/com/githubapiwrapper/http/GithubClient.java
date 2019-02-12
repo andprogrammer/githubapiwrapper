@@ -13,8 +13,8 @@ import static com.githubapiwrapper.utils.Utils.checkIfNotNull;
 
 public class GithubClient extends RestClient {
 
-    public GithubClient(int requestPerSecond) {
-        super("https://api.github.com/", requestPerSecond);
+    public GithubClient() {
+        super("https://api.github.com/");
     }
 
     @Override
@@ -23,7 +23,7 @@ public class GithubClient extends RestClient {
         checkIfNotNull(repositoryName);
         Unirest.setObjectMapper(new JacksonObjectMapper());
         String url = server + "repos/" + owner + "/" + repositoryName;
-        HttpResponse<Repository> response = Unirest.get(url).queryString("limit", requestPerSecond).asObject(Repository.class);
+        HttpResponse<Repository> response = Unirest.get(url).asObject(Repository.class);
         if (200 != response.getStatus())
             throw new CustomException(response.getStatus());
         return response.getBody();
@@ -35,7 +35,6 @@ public class GithubClient extends RestClient {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GithubClient that = (GithubClient) o;
-        return Objects.equals(requestPerSecond, that.requestPerSecond) &&
-                Objects.equals(server, that.server);
+        return Objects.equals(server, that.server);
     }
 }

@@ -26,8 +26,7 @@ public class GithubClientTestSuite {
 
     @Test
     public void testRequest() throws UnirestException {
-        int requestPerSecond = 20;
-        RestClient client = new GithubClient(requestPerSecond);
+        RestClient client = new GithubClient();
         String owner = REPOSITORY_OWNER_TEST;
         String repositoryName = REPOSITORY_NAME_TEST;
         Repository repository = client.request(owner, repositoryName);
@@ -37,24 +36,21 @@ public class GithubClientTestSuite {
 
     @Test
     public void testRequestInvalidRepositoryOwner() throws UnirestException {
-        int requestPerSecond = 20;
-        RestClient client = new GithubClient(requestPerSecond);
+        RestClient client = new GithubClient();
         expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect string=null");
         client.request(null, REPOSITORY_NAME_TEST);
     }
 
     @Test
     public void testRequestInvalidRepositoryName() throws UnirestException {
-        int requestPerSecond = 20;
-        RestClient client = new GithubClient(requestPerSecond);
+        RestClient client = new GithubClient();
         expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect string=null");
         client.request(REPOSITORY_OWNER_TEST, null);
     }
 
     @Test
     public void testInvalidRequest() throws UnirestException {
-        int requestPerSecond = 20;
-        RestClient client = new GithubClient(requestPerSecond);
+        RestClient client = new GithubClient();
         expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "404");
         client.request(NO_EXISTING_REPOSITORY_OWNER, NO_EXISTING_REPOSITORY_NAME);
     }

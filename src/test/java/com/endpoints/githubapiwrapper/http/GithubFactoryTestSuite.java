@@ -19,13 +19,12 @@ public class GithubFactoryTestSuite {
         stop();
     }
 
-    @Test
-    public void testIncorrectCreate() {
-        int requestPerSecond = -1;
-        RestClientFactory factory = new GithubFactory();
-        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Invalid request per second : " + requestPerSecond);
-        factory.create(requestPerSecond);
-    }
+//    @Test
+//    public void testIncorrectCreate() {
+//        RestClientFactory factory = new GithubFactory();
+//        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Invalid request per second : " + requestPerSecond);
+//        factory.create();
+//    }
 
     private <T> void expectedExceptionThrow(Class<T> exceptionType, String exceptionMessage) {
         expectedExceptionThrown.expect((Class<? extends Throwable>) exceptionType);
