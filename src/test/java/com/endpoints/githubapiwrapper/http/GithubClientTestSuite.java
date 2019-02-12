@@ -1,6 +1,5 @@
 package com.endpoints.githubapiwrapper.http;
 
-import com.githubapiwrapper.http.GithubClient;
 import com.githubapiwrapper.http.RestClient;
 import com.githubapiwrapper.model.Repository;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -16,6 +15,7 @@ import static spark.Spark.stop;
 
 public class GithubClientTestSuite {
 
+    public static final String HTTPS_API_GITHUB_COM = "https://api.github.com/";
     @Rule
     public ExpectedException expectedExceptionThrown = ExpectedException.none();
 
@@ -26,7 +26,7 @@ public class GithubClientTestSuite {
 
     @Test
     public void testRequest() throws UnirestException {
-        RestClient client = new GithubClient();
+        RestClient client = new RestClient(HTTPS_API_GITHUB_COM);
         String owner = REPOSITORY_OWNER_TEST;
         String repositoryName = REPOSITORY_NAME_TEST;
         Repository repository = client.request(owner, repositoryName);
@@ -36,21 +36,21 @@ public class GithubClientTestSuite {
 
     @Test
     public void testRequestInvalidRepositoryOwner() throws UnirestException {
-        RestClient client = new GithubClient();
+        RestClient client = new RestClient(HTTPS_API_GITHUB_COM);
         expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect string=null");
         client.request(null, REPOSITORY_NAME_TEST);
     }
 
     @Test
     public void testRequestInvalidRepositoryName() throws UnirestException {
-        RestClient client = new GithubClient();
+        RestClient client = new RestClient(HTTPS_API_GITHUB_COM);
         expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "Incorrect string=null");
         client.request(REPOSITORY_OWNER_TEST, null);
     }
 
     @Test
     public void testInvalidRequest() throws UnirestException {
-        RestClient client = new GithubClient();
+        RestClient client = new RestClient(HTTPS_API_GITHUB_COM);
         expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "404");
         client.request(NO_EXISTING_REPOSITORY_OWNER, NO_EXISTING_REPOSITORY_NAME);
     }
