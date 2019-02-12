@@ -67,13 +67,12 @@ public class Repository {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Repository that = (Repository) o;
-        return Objects.equals(fullName, that.fullName) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(cloneUrl, that.cloneUrl) &&
-                Objects.equals(stars, that.stars) &&
-                Objects.equals(createdAt, that.createdAt);
+        if (!(o instanceof Repository)) return false;
+        Repository repository = (Repository) o;
+        return Objects.equals(fullName, repository.fullName) &&
+                Objects.equals(description, repository.description) &&
+                Objects.equals(cloneUrl, repository.cloneUrl) &&
+                Objects.equals(stars, repository.stars) &&
+                Objects.equals(createdAt, repository.createdAt);
     }
 }

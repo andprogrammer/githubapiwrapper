@@ -33,8 +33,6 @@ public class RestClient {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof RestClient)) return false;
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
         RestClient client = (RestClient) o;
         return Objects.equals(server, client.server);
     }
