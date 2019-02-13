@@ -36,4 +36,9 @@ public class RestClient {
         RestClient client = (RestClient) o;
         return Objects.equals(server, client.server);
     }
+
+    @Override
+    public int hashCode() {
+        return server.hashCode();
+    }
 }

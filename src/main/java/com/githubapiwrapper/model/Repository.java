@@ -65,4 +65,9 @@ public class Repository {
                 Objects.equals(stars, repository.stars) &&
                 Objects.equals(createdAt, repository.createdAt);
     }
+
+    @Override
+    public int hashCode() {
+        return fullName.hashCode() + description.hashCode() + cloneUrl.hashCode() + stars + createdAt.hashCode();
+    }
 }
