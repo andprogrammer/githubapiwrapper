@@ -23,6 +23,7 @@ public class RestClient {
         checkIfNotNull(owner);
         checkIfNotNull(repositoryName);
         Unirest.setObjectMapper(new JacksonObjectMapper());
+        Unirest.setTimeouts(60000, 30000);
         String url = server + "repos/" + owner + "/" + repositoryName;
         HttpResponse<Repository> response = Unirest.get(url).asObject(Repository.class);
         if (200 != response.getStatus())
