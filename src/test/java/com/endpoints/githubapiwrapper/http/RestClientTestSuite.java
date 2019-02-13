@@ -15,7 +15,7 @@ import static spark.Spark.stop;
 
 import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 
-public class GithubClientTestSuite {
+public class RestClientTestSuite {
 
     public static final String HTTPS_API_GITHUB_COM = "https://api.github.com/";
     @Rule
