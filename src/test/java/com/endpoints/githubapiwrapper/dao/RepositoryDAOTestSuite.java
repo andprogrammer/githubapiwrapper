@@ -14,6 +14,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static spark.Spark.stop;
 
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+
 public class RepositoryDAOTestSuite {
 
     @Rule
@@ -48,13 +50,13 @@ public class RepositoryDAOTestSuite {
     @Test
     public void testGetNoExistingRepository() throws CustomException, UnirestException {
         RepositoryDAO repositoryDAO = getRepositoryDAO();
-        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "404");
+        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, Integer.toString(SC_NOT_FOUND));
         repositoryDAO.getRepository(NO_EXISTING_REPOSITORY_OWNER, NO_EXISTING_REPOSITORY_NAME);
     }
 
     private <T> void expectedExceptionThrow(Class<T> exceptionType, String exceptionMessage) {
         expectedExceptionThrown.expect((Class<? extends Throwable>) exceptionType);
-        expectedExceptionThrown.expectMessage(exceptionMessage);
+        expectedExceptionThrown. expectMessage(exceptionMessage);
     }
 
     private Repository createRepository() throws CustomException, UnirestException {

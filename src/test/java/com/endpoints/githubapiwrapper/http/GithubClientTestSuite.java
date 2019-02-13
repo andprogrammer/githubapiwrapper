@@ -13,6 +13,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static spark.Spark.stop;
 
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+
 public class GithubClientTestSuite {
 
     public static final String HTTPS_API_GITHUB_COM = "https://api.github.com/";
@@ -51,7 +53,7 @@ public class GithubClientTestSuite {
     @Test
     public void testInvalidRequest() throws UnirestException {
         RestClient client = new RestClient(HTTPS_API_GITHUB_COM);
-        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, "404");
+        expectedExceptionThrow(com.githubapiwrapper.exception.CustomException.class, Integer.toString(SC_NOT_FOUND));
         client.request(NO_EXISTING_REPOSITORY_OWNER, NO_EXISTING_REPOSITORY_NAME);
     }
 
