@@ -1,6 +1,5 @@
 package com.endpoints.githubapiwrapper.dao;
 
-import com.githubapiwrapper.dao.AbstractFactory;
 import com.githubapiwrapper.dao.RepositoryDAO;
 import com.githubapiwrapper.exception.CustomException;
 import com.githubapiwrapper.model.Repository;
@@ -65,6 +64,6 @@ public class RepositoryDAOTestSuite {
     }
 
     private RepositoryDAO getRepositoryDAO() {
-        return AbstractFactory.getFactory().create();
+        return new RepositoryDAO();
     }
 }

@@ -1,6 +1,5 @@
 package com.githubapiwrapper;
 
-import com.githubapiwrapper.dao.AbstractFactory;
 import com.githubapiwrapper.dao.RepositoryDAO;
 import com.githubapiwrapper.service.RepositoryService;
 import org.apache.log4j.Logger;
@@ -19,8 +18,7 @@ public class Application {
     }
 
     private static void startServices() {
-        AbstractFactory factory = AbstractFactory.getFactory();
-        RepositoryDAO repository = factory.create();
+        RepositoryDAO repository = new RepositoryDAO();
         new RepositoryService(repository);
     }
 }
