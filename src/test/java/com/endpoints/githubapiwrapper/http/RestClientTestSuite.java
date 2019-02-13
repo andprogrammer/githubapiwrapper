@@ -9,11 +9,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static com.endpoints.githubapiwrapper.utils.Utils.*;
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static spark.Spark.stop;
-
-import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 
 public class RestClientTestSuite {
 
